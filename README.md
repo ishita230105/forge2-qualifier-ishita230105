@@ -54,4 +54,10 @@ npm run dev
 
 ---
 
-🎓 *Developed by Ishita Modi.*
+## 🌐 Live Deployment
+- **Frontend (Vercel)**: [Insert Your Vercel URL Here]
+- **Backend (Render)**: `https://forge2-qualifier-ishita230105.onrender.com`
+
+---
+
+🎓 *Developed and personalized from scratch by Ishita Modi.*
