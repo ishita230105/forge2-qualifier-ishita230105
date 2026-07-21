@@ -1,0 +1,199 @@
+{
+  "plugins": {
+    "allow": [
+      "file-transfer",
+      "slack"
+    ],
+    "bundledDiscovery": "compat"
+  },
+  "channels": {
+    "slack": {
+      "enabled": true,
+      "mode": "socket",
+      "appToken": {
+        "source": "env",
+        "provider": "default",
+        "id": "SLACK_APP_TOKEN"
+      },
+      "botToken": {
+        "source": "env",
+        "provider": "default",
+        "id": "SLACK_BOT_TOKEN"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": "google/gemini-2.5-flash-lite",
+      "memorySearch": {
+        "enabled": false
+      },
+      "compaction": {
+        "reserveTokens": 1024,
+        "reserveTokensFloor": 1024
+      },
+      "skills": [],
+      "elevatedDefault": "full"
+    },
+    "list": [
+      {
+        "id": "main",
+        "workspace": "d:\\taskflow",
+        "agentDir": "C:\\Users\\ishit\\.openclaw\\agents\\main\\agent",
+        "model": {
+          "primary": "google/gemini-2.5-flash-lite",
+          "fallbacks": [
+            "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+            "groq/llama-3.1-8b-instant",
+            "groq/llama-3.3-70b-versatile"
+          ]
+        },
+        "identity": {
+          "name": "OpenClaw Coder",
+          "emoji": "\u00f0\u0178\u2019\u00bb",
+          "theme": "Software Engineering Assistant"
+        },
+        "tools": {
+          "allow": [
+            "read",
+            "write",
+            "edit",
+            "dir_list",
+            "exec"
+          ]
+        }
+      },
+      {
+        "id": "qa",
+        "name": "qa",
+        "workspace": "d:\\taskflow",
+        "agentDir": "C:\\Users\\ishit\\.openclaw\\agents\\qa\\agent",
+        "model": {
+          "primary": "google/gemini-2.5-flash-lite",
+          "fallbacks": [
+            "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+            "groq/llama-3.1-8b-instant",
+            "groq/llama-3.3-70b-versatile"
+          ]
+        },
+        "identity": {
+          "name": "OpenClaw QA",
+          "emoji": "\u00f0\u0178\u00a7\u00aa",
+          "theme": "Test Automation Bot"
+        },
+        "tools": {
+          "allow": [
+            "read",
+            "exec"
+          ],
+          "sandbox": {
+            "tools": {
+              "allow": [
+                "read",
+                "exec"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "models": {
+    "providers": {
+      "google": {
+        "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+        "apiKey": {
+          "source": "env",
+          "provider": "default",
+          "id": "GEMINI_API_KEY"
+        },
+        "models": [
+          {
+            "id": "gemini-2.5-flash-lite",
+            "name": "Gemini 2.5 Flash Lite",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 1000000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "groq": {
+        "api": "openai-responses",
+        "baseUrl": "https://api.groq.com/openai/v1",
+        "apiKey": {
+          "source": "env",
+          "provider": "default",
+          "id": "GROQ_API_KEY"
+        },
+        "models": [
+          {
+            "id": "llama-3.3-70b-versatile",
+            "name": "Llama 3.3 70B Versatile",
+            "api": "openai-responses",
+            "maxTokens": 2048,
+            "contextWindow": 12000,
+            "contextTokens": 12000
+          }
+        ]
+      },
+      "ollama": {
+        "api": "openai-completions",
+        "baseUrl": "http://127.0.0.1:11434/v1",
+        "apiKey": {
+          "source": "env",
+          "provider": "default",
+          "id": "OLLAMA_API_KEY"
+        },
+        "models": [
+          {
+            "id": "qwen2.5-coder:7b",
+            "name": "Qwen 2.5 Coder 7B (Ollama)",
+            "api": "openai-completions",
+            "maxTokens": 4096,
+            "contextWindow": 16000,
+            "contextTokens": 16000
+          },
+          {
+            "id": "deepseek-r1:8b",
+            "name": "DeepSeek R1 8B (Ollama)",
+            "api": "openai-completions",
+            "maxTokens": 4096,
+            "contextWindow": 16000,
+            "contextTokens": 16000
+          }
+        ]
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local"
+  },
+  "tools": {
+    "elevated": {
+      "enabled": true,
+      "allowFrom": {
+        "unknown": [
+          "*"
+        ],
+        "direct": [
+          "*"
+        ],
+        "(unknown)": [
+          "*"
+        ]
+      }
+    }
+  },
+  "skills": {
+    "allowBundled": []
+  }
+}
