@@ -132,6 +132,12 @@ export default function App() {
     loadBoard(activeBoard.id);
   }
 
+  async function deleteList(listId) {
+    if (!confirm("Are you sure you want to delete this list and all its cards?")) return;
+    await api.deleteList(listId);
+    loadBoard(activeBoard.id);
+  }
+
   async function attachTag(cardId, tagId) {
     await api.attachTag(cardId, tagId);
     loadBoard(activeBoard.id);
@@ -237,7 +243,10 @@ export default function App() {
               >
                 <div className="list-header">
                   <h2>{list.name}</h2>
-                  <span>{list.cards.length}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span>{list.cards.length}</span>
+                    <button className="delete-list-btn" onClick={() => deleteList(list.id)} title="Delete list" aria-label="Delete list" style={{ background: 'transparent', color: '#888', border: 'none', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px' }}>&times;</button>
+                  </div>
                 </div>
                 <div className="cards">
                   {list.cards.length === 0 && (
