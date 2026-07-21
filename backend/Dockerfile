@@ -8,8 +8,8 @@ ENV APP_ENV=production
 ENV APP_DEBUG=true
 ENV APP_KEY="base64:Dymg1P6E1hH3Dq6w8G6kR9Z0kE4xO6wB1tP9qL4vF4g="
 
-# Copy application files and set ownership to webuser
-COPY --chown=webuser:webgroup . /var/www/html
+# Copy application files and set ownership to www-data
+COPY --chown=www-data:www-data . /var/www/html
 
 # Switch to root to ensure permissions during build
 USER root
@@ -21,7 +21,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 RUN touch database/database.sqlite && \
     php artisan migrate --force && \
     php artisan db:seed --force && \
-    chown -R webuser:webgroup /var/www/html
+    chown -R www-data:www-data /var/www/html
 
-# Switch back to webuser for runtime
-USER webuser
+# Switch back to www-data for runtime
+USER www-data
