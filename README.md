@@ -1,4 +1,4 @@
-# 🚀 Taskflow
+# 🚀 Taskflow(The KanBan Board)
 
 Taskflow is a premium, beautifully designed Kanban board built with a **Laravel API (SQLite)** backend and a **React (Vite)** frontend. It features a clean, modern aesthetic focusing on smooth interactions, intuitive design, and seamless task management.
 
@@ -54,4 +54,4 @@ npm run dev
 
 ---
 
-🎓 *Developed and personalized from scratch by Ishita Modi.*
+🎓 *Developed by Ishita Modi.*
