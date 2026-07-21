@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
         $board = Board::create(['name' => 'Forge 2 Qualifier']);
 
         $todo = $board->lists()->create(['name' => 'To-Do', 'position' => 1]);
-        $doing = $board->lists()->create(['name' => 'Doing', 'position' => 2]);
-        $done = $board->lists()->create(['name' => 'Done', 'position' => 3]);
+        $doing = $board->lists()->create(['name' => 'In-Process', 'position' => 2]);
+        $done = $board->lists()->create(['name' => 'Completed', 'position' => 3]);
 
         $bug = Tag::create(['name' => 'bug', 'color' => '#e74c3c']);
         $design = Tag::create(['name' => 'design', 'color' => '#9b59b6']);
